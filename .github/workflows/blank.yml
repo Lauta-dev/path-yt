@@ -31,16 +31,14 @@ jobs:
 
       - name: Descargar apk
         run: |
-          curl -L -o yt.apk "https://eb5e7388c3df147b74dd2379b7cf8323.r2.cloudflarestorage.com/downloadprod/wp-content/uploads/2025/07/55/686dd3ae8ca27/com.google.android.youtube_20.26.40-1555432896_minAPI26%28arm64-v8a%2Carmeabi-v7a%2Cx86%2Cx86_64%29%28nodpi%29_apkmirror.com.apk?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=72a5ba3a0b8a601e535d5525f12f8177%2F20260410%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260410T163239Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=95a696527673522bb5dcc453731102a8b4a1a6fbf8cfb6a76498ca7adeb354af"
+          curl -L -o yt.apk "https://eb5e7388c3df147b74dd2379b7cf8323.r2.cloudflarestorage.com/downloadprod/wp-content/uploads/2025/06/79/683bea6f7699f/com.google.android.youtube_20.21.37-1554771392_minAPI26%28arm64-v8a%2Carmeabi-v7a%2Cx86%2Cx86_64%29%28nodpi%29_apkmirror.com.apk?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=72a5ba3a0b8a601e535d5525f12f8177%2F20260410%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260410T163539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=7b114f36adf1ffdaaaccd20081c298e83d4dfb67d6670b67329bf56ab4c2a733"
 
       - name: Descargar path file
         run: curl -L -o patches.mpp https://github.com/MorpheApp/morphe-patches/releases/download/v1.23.0/patches-1.23.0.mpp
 
-      #- name: gen paths file
-      #  run: java -jar cli.jar list-patches --patches patches.mpp --with-packages --with-versions --with-options
       - name: primer ls
         run: |
-          ls
+          ls -l
           ls -lh yt.apk
           file yt.apk
       
@@ -49,8 +47,8 @@ jobs:
           java -jar cli.jar patch -p patches.mpp yt.apk
 
       - name: ls
-        run: ls
+        run: ls -l
 
       - uses: actions/upload-artifact@v7
         with:
-          path: yt.apk
+          path: yt-patched.apk
