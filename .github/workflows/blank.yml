@@ -37,6 +37,7 @@ jobs:
         run: |
           ls
           ls -lh yt.apk
+          file yt.apk
       
       - name: Parchear app
         run: |
