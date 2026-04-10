@@ -35,13 +35,12 @@ jobs:
 
       - name: primer ls
         run: |
-        ls
-        ls -lh yt.apk
-        
+          ls
+          ls -lh yt.apk
       
       - name: Parchear app
         run: |
-          java -jar cli.jar patch pp yt.apk
+          java -jar cli.jar patch --patches patches.mpp yt.apk
 
       - name: ls
         run: ls
@@ -49,4 +48,3 @@ jobs:
       - uses: actions/upload-artifact@v7
         with:
           path: yt.apk
-
