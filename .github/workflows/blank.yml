@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Descargar cli
+        run: |
+          curl -o cli.jar https://github.com/MorpheApp/morphe-cli/releases/download/v1.6.3/morphe-cli-1.6.3-all.jar
+
+      - name: Descargar apk
+        run: |
+          curl -o yt.apk "https://eb5e7388c3df147b74dd2379b7cf8323.r2.cloudflarestorage.com/downloadprod/wp-content/uploads/2025/07/55/686dd3ae8ca27/com.google.android.youtube_20.26.40-1555432896_minAPI26%28arm64-v8a%2Carmeabi-v7a%2Cx86%2Cx86_64%29%28nodpi%29_apkmirror.com.apk?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=72a5ba3a0b8a601e535d5525f12f8177%2F20260410%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260410T152530Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c93a7a6aae53df7d93856d12934b6e0616510afc1b3e4691d2c5628192d7e683"
+
+      - name: Parchear app
+        run: |
+          java -jar cli.jar patch --patches patches.mpp yt.apk
+
+      - name: ls
+        run: ls
+
+      - uses: actions/upload-artifact@v7
+        with:
+          path: yt.apk
