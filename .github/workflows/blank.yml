@@ -38,7 +38,7 @@ jobs:
       
       - name: Parchear app
         run: |
-          java -jar cli.jar patch --patches patches.mpp yt.apk
+          java -jar cli.jar patch pp yt.apk
 
       - name: ls
         run: ls
