@@ -52,3 +52,15 @@ jobs:
       - uses: actions/upload-artifact@v7
         with:
           path: yt-patched.apk
+          
+      - name: "Create GitHub Release"
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: abc-${{ github.run_number }}
+          name: "parche yt"
+          body: |
+            Parche de yt
+          files: |
+            yt-patched.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
